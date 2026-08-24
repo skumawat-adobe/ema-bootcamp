@@ -1,5 +1,5 @@
 {
-  "project": "AEM XWalk Boilerplate",
+  "project": "Ema Bootcamp",
   "editUrlLabel": "AEM Editor",
   "editUrlPattern": "{{contentSourceUrl}}{{pathname}}?cmd=open"
 }
