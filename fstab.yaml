@@ -1,5 +1,5 @@
 mountpoints:
   /:
-    url: https://da.live/#/skumawat-adobe/ema-bootcamp/bin/franklin.delivery/skumawat-adobe/ema-bootcamp/main
+    url: https://da.live/#/skumawat-adobe/ema-bootcamp
     type: markup
     suffix: .html
