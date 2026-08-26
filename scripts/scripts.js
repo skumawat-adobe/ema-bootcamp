@@ -9,6 +9,8 @@ import {
   loadSection,
   loadSections,
   loadCSS,
+  buildBlock,
+  getMetadata,
 } from './aem.js';
 
 /**
@@ -61,9 +63,14 @@ async function loadFonts() {
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
-function buildAutoBlocks() {
+function buildAutoBlocks(main) {
   try {
-    // TODO: add auto block, if needed
+    if (getMetadata('breadcrumbs').toLowerCase() === 'true') {
+      const breadcrumbs = buildBlock('breadcrumbs', []);
+      const section = document.createElement('div');
+      section.append(breadcrumbs);
+      main.prepend(section);
+    }
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Auto Blocking failed', error);

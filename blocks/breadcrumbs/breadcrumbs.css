@@ -1,0 +1,42 @@
+.breadcrumbs nav {
+  padding: 8px 0;
+  font-size: var(--body-font-size-xs);
+}
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.breadcrumbs li {
+  display: inline-flex;
+  align-items: center;
+}
+
+.breadcrumbs li:not(:first-child)::before {
+  padding: 0 6px;
+  color: var(--link-color);
+  font-size: 10px;
+  content: "▶";
+}
+
+.breadcrumbs a {
+  color: var(--text-color);
+  text-transform: uppercase;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.breadcrumbs a:hover {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+}
+
+.breadcrumbs li[aria-current="page"] {
+  color: var(--dark-color);
+  text-transform: uppercase;
+}
