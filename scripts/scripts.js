@@ -11,6 +11,7 @@ import {
   loadCSS,
   buildBlock,
   getMetadata,
+  toCamelCase,
 } from './aem.js';
 
 /**
@@ -45,6 +46,47 @@ export function moveInstrumentation(from, to) {
       .map(({ nodeName }) => nodeName)
       .filter((attr) => attr.startsWith('data-aue-') || attr.startsWith('data-richtext-')),
   );
+}
+
+/**
+ * Fetches key/value rows from a sheet and camel-cases the keys.
+ * @param {string} path path to the published sheet JSON
+ * @returns {Promise<object>} key/value config
+ */
+async function fetchKeyValueSheet(path) {
+  const resp = await fetch(path);
+  if (!resp.ok) return {};
+  const json = await resp.json();
+  const values = {};
+  (json.data || []).forEach((row) => {
+    values[toCamelCase(row.Key)] = row.Value;
+  });
+  return values;
+}
+
+/**
+ * Fetches and caches site-wide configuration (e.g. data source URLs) from
+ * /config.json so blocks never hardcode external/API URLs.
+ * @returns {Promise<object>} site configs, keyed by camel-cased config key
+ */
+export async function fetchConfigs() {
+  window.configs = window.configs || fetchKeyValueSheet(`${window.hlx.codeBasePath}/config.json`).catch(() => ({}));
+  return window.configs;
+}
+
+/**
+ * Fetches and caches placeholder text (e.g. UI labels) so copy can be
+ * authored and localized without touching code.
+ * @param {string} prefix folder containing the placeholders sheet
+ * @returns {Promise<object>} placeholders, keyed by camel-cased key
+ */
+export async function fetchPlaceholders(prefix = 'default') {
+  window.placeholders = window.placeholders || {};
+  if (!window.placeholders[prefix]) {
+    const path = prefix === 'default' ? '' : prefix;
+    window.placeholders[prefix] = fetchKeyValueSheet(`${path}/placeholders.json`).catch(() => ({}));
+  }
+  return window.placeholders[prefix];
 }
 
 /**
