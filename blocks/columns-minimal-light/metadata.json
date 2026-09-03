@@ -1,0 +1,39 @@
+{
+  "variantName": "columns-minimal-light",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-09-03T10:15:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd-trendsetters.site/faq",
+    "originPage": "FAQ support page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "purpose": "contact",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "two text columns: left heading + intro paragraph, right labeled contact details (email/phone/address)",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "two-column side-by-side text layouts on light backgrounds",
+      "contact / get-in-touch sections",
+      "informational split content without images"
+    ],
+    "notSuitableFor": [
+      "image-heavy side-by-side layouts",
+      "dark-themed columns",
+      "repeating card-style item grids (use a cards variant)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/faq"],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-03T10:15:00.000Z"
+  }
+}

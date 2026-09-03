@@ -1,0 +1,37 @@
+{
+  "variantName": "cards-minimal-light-withimg",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-09-03T09:06:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd-trendsetters.site/",
+    "originPage": "landing page (homepage)",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "purpose": "image-gallery",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "grid of image-only cards",
+    "buttonCount": 0,
+    "imageCount": 8
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "image gallery grids on light backgrounds",
+      "4-column square image collections without captions"
+    ],
+    "notSuitableFor": [
+      "cards with rich text bodies",
+      "dark-themed card grids"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-03T09:06:00.000Z"
+  }
+}

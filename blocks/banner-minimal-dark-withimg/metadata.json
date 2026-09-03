@@ -1,0 +1,39 @@
+{
+  "variantName": "banner-minimal-dark-withimg",
+  "baseBlock": "banner",
+  "version": "1.0.0",
+  "created": "2026-09-03T09:06:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd-trendsetters.site/",
+    "originPage": "landing page (homepage)",
+    "blockPosition": "bottom"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "minimal",
+    "purpose": "overlay-cta",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "background image + dark overlay + heading + subheading + 1 CTA",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "full-width overlay call-to-action banners",
+      "background-image banners with overlaid heading and single CTA",
+      "dark-themed closing sections"
+    ],
+    "notSuitableFor": [
+      "solid-color banners without a background image (use base banner block)",
+      "multi-column content layouts"
+    ],
+    "notes": "Base 'banner' block was not available in the remote library; this overlay variant was adapted from the site's proven absolute-background-image overlay pattern to match the homepage inverse-section CTA banner."
+  },
+  "usage": {
+    "pagesUsing": ["/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-03T09:06:00.000Z"
+  }
+}

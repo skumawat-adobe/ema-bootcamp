@@ -1,0 +1,39 @@
+{
+  "variantName": "hero-minimal-light-withimg-1",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-09-03T09:06:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd-trendsetters.site/",
+    "originPage": "landing page (homepage)",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "purpose": "landing-hero",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "heading + subheading + 2 CTAs + 3 images",
+    "buttonCount": 2,
+    "imageCount": 3
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "landing page hero headers",
+      "two-column intro with heading/CTAs and a stacked image group",
+      "light-background page introductions"
+    ],
+    "notSuitableFor": [
+      "dark overlay heroes",
+      "text-only heroes without images",
+      "article detail headers with breadcrumbs/author meta"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/index", "/blog", "/faq"],
+    "reuseCount": 3,
+    "lastUsed": "2026-09-03T10:15:00.000Z"
+  }
+}

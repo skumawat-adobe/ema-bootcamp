@@ -1,0 +1,37 @@
+{
+  "variantName": "tabs-minimal-light-withimg",
+  "baseBlock": "tabs",
+  "version": "1.0.0",
+  "created": "2026-09-03T09:06:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd-trendsetters.site/",
+    "originPage": "landing page (homepage)",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "purpose": "testimonial-tabs",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "4 tab panels (image + name + role + quote) with avatar tab labels",
+    "buttonCount": 0,
+    "imageCount": 8
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "tabbed testimonial/profile switchers on light backgrounds",
+      "content panels with image + name + role + quote"
+    ],
+    "notSuitableFor": [
+      "dark-themed tabs",
+      "simple text-only tab switchers"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-03T09:06:00.000Z"
+  }
+}

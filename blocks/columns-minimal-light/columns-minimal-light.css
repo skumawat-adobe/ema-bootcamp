@@ -1,0 +1,33 @@
+.columns-minimal-light > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.columns-minimal-light img {
+  width: 100%;
+}
+
+.columns-minimal-light > div > div {
+  order: 1;
+}
+
+.columns-minimal-light > div > .columns-minimal-light-img-col {
+  order: 0;
+}
+
+.columns-minimal-light > div > .columns-minimal-light-img-col img {
+  display: block;
+}
+
+@media (width >= 900px) {
+  .columns-minimal-light > div {
+    align-items: center;
+    flex-direction: unset;
+    gap: 24px;
+  }
+
+  .columns-minimal-light > div > div {
+    flex: 1;
+    order: unset;
+  }
+}

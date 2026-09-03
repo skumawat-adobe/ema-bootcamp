@@ -1,0 +1,47 @@
+.hero-minimal-light-withimg-1-container .hero-minimal-light-withimg-1-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-minimal-light-withimg-1 {
+  position: relative;
+  padding: 40px 24px;
+  min-height: 300px;
+}
+
+.hero-minimal-light-withimg-1 h1,
+.hero-minimal-light-withimg-1 h2,
+.hero-minimal-light-withimg-1 h3,
+.hero-minimal-light-withimg-1 h4,
+.hero-minimal-light-withimg-1 h5,
+.hero-minimal-light-withimg-1 h6,
+.hero-minimal-light-withimg-1 p {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--background-color);
+}
+
+.hero-minimal-light-withimg-1.no-image * {
+  color: var(--text-color);
+}
+
+.hero-minimal-light-withimg-1 picture {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  object-fit: cover;
+  box-sizing: border-box;
+}
+
+.hero-minimal-light-withimg-1 img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+@media (width >= 900px) {
+  .hero-minimal-light-withimg-1 {
+    padding: 40px 32px;
+  }
+}

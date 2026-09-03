@@ -1,0 +1,14 @@
+{
+  "type": "da",
+  "sites": {
+    "ema-bootcamp": {
+      "previewOrg": "skumawat-adobe",
+      "previewSite": "ema-bootcamp",
+      "contentHostUrl": "https://content.da.live/skumawat-adobe/ema-bootcamp/",
+      "libraryUrl": "https://main--sta-boilerplate--aemdemos.aem.page/tools/sidekick/library.json"
+    }
+  },
+  "features": [
+    "site-planning"
+  ]
+}
