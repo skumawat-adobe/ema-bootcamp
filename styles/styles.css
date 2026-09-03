@@ -104,7 +104,8 @@ h6 {
 
 /* Display headings (page/section titles) are uppercase in the brand */
 h1,
-h2 {
+h2,
+h3 {
   text-transform: uppercase;
 }
 
@@ -123,6 +124,20 @@ pre,
 blockquote {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
+}
+
+/* Default-content prose to match the brand's article styling */
+main .default-content-wrapper blockquote {
+  margin: 1em 0;
+  padding-left: 24px;
+  border-left: 4px solid var(--accent-color);
+  color: #404040;
+  font-style: italic;
+}
+
+main .default-content-wrapper ul {
+  list-style: none;
+  padding-left: 0;
 }
 
 code,
@@ -303,6 +318,18 @@ main img {
 /* sections */
 main > .section {
   margin: 40px 0;
+}
+
+/* Plain sections (no background variant) carry the brand's vertical rhythm.
+   Styled variants below set their own margin:0 + padding, so exclude them. */
+main > .section:not(.secondary, .accent, .inverse, .light, .highlight) {
+  padding: var(--section-padding) 0;
+}
+
+@media (width >= 900px) {
+  main > .section:not(.secondary, .accent, .inverse, .light, .highlight) > div {
+    padding: 0 32px;
+  }
 }
 
 main > .section > div {

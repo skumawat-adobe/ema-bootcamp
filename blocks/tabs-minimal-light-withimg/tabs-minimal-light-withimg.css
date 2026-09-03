@@ -58,7 +58,8 @@
 
 /* the quote is the last paragraph */
 .tabs-minimal-light-withimg .tabs-minimal-light-withimg-panel-body p:last-child {
-  margin-top: 24px;
+  margin-top: 16px;
+  margin-bottom: 48px;
 }
 
 /* ---------- Tab menu ---------- */
@@ -142,8 +143,8 @@
   }
 
   .tabs-minimal-light-withimg .tabs-minimal-light-withimg-panel-body p:last-child {
-    margin-top: 32px;
-    margin-bottom: 16px;
+    margin-top: 16px;
+    margin-bottom: 48px;
   }
 
   .tabs-minimal-light-withimg .tabs-minimal-light-withimg-list {

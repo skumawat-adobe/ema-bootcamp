@@ -30,7 +30,7 @@
 .columns-minimal-light-withimg h2 {
   margin: 0;
   font-family: var(--heading-font-family);
-  font-size: var(--heading-font-size-xxl);
+  font-size: 24px; /* source computed size at mobile */
   font-weight: 700;
   line-height: 1.1;
   text-transform: uppercase;
@@ -85,5 +85,9 @@
   .columns-minimal-light-withimg > div > div {
     flex: 1;
     order: unset;
+  }
+
+  .columns-minimal-light-withimg h2 {
+    font-size: 40px; /* source computed size at desktop */
   }
 }
