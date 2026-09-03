@@ -35,10 +35,10 @@ var CustomImportScript = (() => {
   };
   var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-  // tools/importer/import-listing-page.js
-  var import_listing_page_exports = {};
-  __export(import_listing_page_exports, {
-    default: () => import_listing_page_default
+  // tools/importer/import-content-detail.js
+  var import_content_detail_exports = {};
+  __export(import_content_detail_exports, {
+    default: () => import_content_detail_default
   });
 
   // tools/importer/parsers/hero-minimal-light-withimg-1.js
@@ -66,37 +66,8 @@ var CustomImportScript = (() => {
     element.replaceWith(block);
   }
 
-  // tools/importer/parsers/hero-minimal-dark-withimg.js
-  function parse2(element, { document: document2 }) {
-    const columns = element.querySelectorAll(":scope > div");
-    const firstCol = columns[0] || null;
-    const secondCol = columns[1] || null;
-    const image = firstCol && firstCol.querySelector('img.cover-image, img[class*="cover"], img') || element.querySelector('img.cover-image, img[class*="cover"], img');
-    const contentSource = secondCol || element;
-    const contentCell = [];
-    const breadcrumbs = contentSource.querySelector('.breadcrumbs, nav, [class*="breadcrumb"]');
-    if (breadcrumbs) contentCell.push(breadcrumbs);
-    const heading = contentSource.querySelector('h1, h2, [class*="heading"], [class*="title"]');
-    if (heading) contentCell.push(heading);
-    const contentChildren = contentSource.querySelectorAll(":scope > *");
-    contentChildren.forEach((child) => {
-      if (child === breadcrumbs || child === heading) return;
-      if (child.tagName === "IMG") return;
-      contentCell.push(child);
-    });
-    if (!image && contentCell.length === 0) {
-      element.replaceWith(...element.childNodes);
-      return;
-    }
-    const imageCell = image || "";
-    const cells = [];
-    cells.push([imageCell, contentCell]);
-    const block = WebImporter.Blocks.createBlock(document2, { name: "hero-minimal-dark-withimg", cells });
-    element.replaceWith(block);
-  }
-
   // tools/importer/parsers/cards-minimal-light-withimg-1.js
-  function parse3(element, { document: document2 }) {
+  function parse2(element, { document: document2 }) {
     const IMAGE_SEL = '.article-card-image, .trend-card-image, [class*="card-image"]';
     const BODY_SEL = '.article-card-body, .trend-card-body, [class*="card-body"]';
     const firstAnchor = element.querySelector("a[href]");
@@ -166,72 +137,30 @@ var CustomImportScript = (() => {
     element.replaceWith(block);
   }
 
-  // tools/importer/parsers/cards-minimal-light-withimg.js
-  function parse4(element, { document: document2 }) {
-    const items = Array.from(element.querySelectorAll(":scope > div"));
-    const cells = [];
-    items.forEach((item) => {
-      const img = item.querySelector('img.cover-image, img[class*="cover"], img');
-      if (img) cells.push([img, ""]);
-    });
-    if (cells.length === 0) {
+  // tools/importer/parsers/columns-minimal-light-withimg.js
+  function parse3(element, { document: document2 }) {
+    let columns = Array.from(element.querySelectorAll(":scope > div"));
+    if (columns.length === 0) {
+      columns = Array.from(element.children);
+    }
+    const rowCells = columns.map((col) => {
+      const content = Array.from(col.childNodes).filter((node) => {
+        if (node.nodeType === Node.ELEMENT_NODE) return true;
+        return node.nodeType === Node.TEXT_NODE && node.textContent.trim().length > 0;
+      });
+      return content;
+    }).filter((cell) => cell.length > 0);
+    if (rowCells.length === 0) {
       element.replaceWith(...element.childNodes);
       return;
     }
-    const block = WebImporter.Blocks.createBlock(document2, { name: "cards-minimal-light-withimg", cells });
-    element.replaceWith(block);
-  }
-
-  // tools/importer/parsers/tabs-minimal-light-withimg.js
-  function parse5(element, { document: document2 }) {
-    const panels = Array.from(element.querySelectorAll(".tab-pane"));
-    const buttons = Array.from(element.querySelectorAll(".tab-menu-link, .tab-menu button"));
-    const count = Math.max(panels.length, buttons.length);
-    const cells = [];
-    for (let i = 0; i < count; i += 1) {
-      const button = buttons[i] || null;
-      const panel = panels[i] || null;
-      let labelCell = "";
-      if (button) {
-        const labelContent = Array.from(button.childNodes);
-        labelCell = labelContent.length ? labelContent : "";
-      }
-      let panelCell = "";
-      if (panel) {
-        const inner = panel.querySelector(":scope > .grid-layout") || panel;
-        const panelContent = Array.from(inner.childNodes);
-        panelCell = panelContent.length ? panelContent : "";
-      }
-      if (labelCell === "" && panelCell === "") continue;
-      cells.push([labelCell, panelCell]);
-    }
-    if (cells.length === 0) {
-      element.replaceWith(...element.childNodes);
-      return;
-    }
-    const block = WebImporter.Blocks.createBlock(document2, { name: "tabs-minimal-light-withimg", cells });
-    element.replaceWith(block);
-  }
-
-  // tools/importer/parsers/banner-minimal-dark-withimg.js
-  function parse6(element, { document: document2 }) {
-    const wrapper = element.querySelector(":scope > div") || element;
-    const image = wrapper.querySelector('img.cover-image, img[class*="overlay"], img[class*="cover"], img') || element.querySelector("img");
-    const contentCell = [];
-    const body = wrapper.querySelector(".card-body") || wrapper;
-    const heading = body.querySelector('h1, h2, h3, [class*="heading"], [class*="title"]');
-    if (heading) contentCell.push(heading);
-    const subheading = body.querySelector("p.subheading, .subheading, p");
-    if (subheading) contentCell.push(subheading);
-    const ctas = Array.from(body.querySelectorAll(".button-group a, a.button, a.inverse-button"));
-    ctas.forEach((cta) => contentCell.push(cta));
-    if (!image && contentCell.length === 0) {
-      element.replaceWith(...element.childNodes);
-      return;
+    const columnCount = rowCells.length;
+    while (rowCells.length < columnCount) {
+      rowCells.push("");
     }
     const cells = [];
-    cells.push([image || "", contentCell.length ? contentCell : ""]);
-    const block = WebImporter.Blocks.createBlock(document2, { name: "banner-minimal-dark-withimg", cells });
+    cells.push(rowCells);
+    const block = WebImporter.Blocks.createBlock(document2, { name: "columns-minimal-light-withimg", cells });
     element.replaceWith(block);
   }
 
@@ -285,14 +214,12 @@ var CustomImportScript = (() => {
     }
   }
 
-  // tools/importer/import-listing-page.js
+  // tools/importer/import-content-detail.js
   var PAGE_TEMPLATE = {
-    name: "listing-page",
-    description: "Index page with hero header, featured-article teaser, article card grids, image galleries, testimonials tabs, and an accent or overlay call-to-action",
+    name: "content-detail",
+    description: "Single-topic content page with hero header, a trend card grid, a two-column image+text block, and an accent call-to-action",
     urls: [
-      "https://wknd-trendsetters.site/blog",
-      "https://wknd-trendsetters.site/case-studies",
-      "https://wknd-trendsetters.site/fashion-insights"
+      "https://wknd-trendsetters.site/fashion-trends-young-adults-casual-sport"
     ],
     blocks: [
       {
@@ -300,50 +227,25 @@ var CustomImportScript = (() => {
         instances: ["#main-content > header.section.secondary-section div.grid-layout.tablet-1-column.grid-gap-xxl"]
       },
       {
-        name: "hero-minimal-dark-withimg",
-        instances: ["#main-content > section.section div.grid-layout.tablet-1-column.grid-gap-lg"]
-      },
-      {
         name: "cards-minimal-light-withimg-1",
-        instances: [
-          "#articles div.grid-layout.desktop-4-column.grid-gap-md",
-          "div.grid-layout.desktop-4-column.grid-gap-md"
-        ]
+        instances: ["#trends div.grid-layout.desktop-4-column.grid-gap-md"]
       },
       {
-        name: "cards-minimal-light-withimg",
-        instances: [
-          "#main-content > section.section.secondary-section div.grid-layout.desktop-4-column.grid-gap-sm",
-          "#main-content > section.section div.grid-layout.desktop-3-column.grid-gap-sm"
-        ]
-      },
-      {
-        name: "tabs-minimal-light-withimg",
-        instances: ["#cases div.tabs-wrapper"]
-      },
-      {
-        name: "banner-minimal-dark-withimg",
-        instances: ["#main-content > section.section.inverse-section div.grid-layout.desktop-1-column"]
+        name: "columns-minimal-light-withimg",
+        instances: ["#main-content > section.section.secondary-section div.grid-layout.tablet-1-column.grid-gap-lg"]
       }
     ],
     sections: [
       { id: "rc1", name: "hero-header", selector: "#main-content > header.section.secondary-section", style: "secondary", blocks: ["hero-minimal-light-withimg-1"], defaultContent: [] },
-      { id: "rc2", name: "featured-article-teaser", selector: ["#main-content > section.section:has(div.grid-layout.tablet-1-column.grid-gap-lg)"], style: null, blocks: ["hero-minimal-dark-withimg"], defaultContent: [] },
-      { id: "rc3", name: "latest-articles", selector: "#articles", style: "secondary", blocks: ["cards-minimal-light-withimg-1"], defaultContent: ["#articles > div.container > div.utility-text-align-center"] },
-      { id: "rc4", name: "image-gallery-secondary", selector: "#main-content > section.section.secondary-section:has(div.grid-layout.desktop-4-column.grid-gap-sm)", style: "secondary", blocks: ["cards-minimal-light-withimg"], defaultContent: ["#main-content > section.section.secondary-section:has(div.grid-layout.desktop-4-column.grid-gap-sm) > div.container > div.utility-text-align-center.utility-margin-bottom-8rem"] },
-      { id: "rc5", name: "image-gallery", selector: "#main-content > section.section:has(div.grid-layout.desktop-3-column.grid-gap-sm)", style: null, blocks: ["cards-minimal-light-withimg"], defaultContent: ["#main-content > section.section:has(div.grid-layout.desktop-3-column.grid-gap-sm) > div.container > div.utility-text-align-center.utility-margin-bottom-8rem"] },
-      { id: "rc6", name: "testimonials-tabs", selector: "#cases", style: null, blocks: ["tabs-minimal-light-withimg"], defaultContent: [] },
-      { id: "rc7", name: "inverse-cta", selector: "#main-content > section.section.inverse-section", style: "inverse", blocks: ["banner-minimal-dark-withimg"], defaultContent: [] },
-      { id: "rc8", name: "accent-cta", selector: "#main-content > section.section.accent-section", style: "accent", blocks: [], defaultContent: ["#main-content > section.section.accent-section > div.container > div.utility-text-align-center"] }
+      { id: "rc2", name: "trend-card-grid", selector: "#trends", style: null, blocks: ["cards-minimal-light-withimg-1"], defaultContent: ["#trends > div.container > div.utility-text-align-center"] },
+      { id: "rc3", name: "secondary-two-column", selector: "#main-content > section.section.secondary-section:has(div.grid-layout.tablet-1-column.grid-gap-lg)", style: "secondary", blocks: ["columns-minimal-light-withimg"], defaultContent: [] },
+      { id: "rc4", name: "accent-cta", selector: "#main-content > section.section.accent-section", style: "accent", blocks: [], defaultContent: ["#main-content > section.section.accent-section > div.container"] }
     ]
   };
   var parsers = {
     "hero-minimal-light-withimg-1": parse,
-    "hero-minimal-dark-withimg": parse2,
-    "cards-minimal-light-withimg-1": parse3,
-    "cards-minimal-light-withimg": parse4,
-    "tabs-minimal-light-withimg": parse5,
-    "banner-minimal-dark-withimg": parse6
+    "cards-minimal-light-withimg-1": parse2,
+    "columns-minimal-light-withimg": parse3
   };
   var transformers = [
     transform,
@@ -382,7 +284,7 @@ var CustomImportScript = (() => {
     console.log(`Found ${pageBlocks.length} block instances on page`);
     return pageBlocks;
   }
-  var import_listing_page_default = {
+  var import_content_detail_default = {
     transform: (payload) => {
       const { document: document2, url, html, params } = payload;
       const main = document2.body;
@@ -420,5 +322,5 @@ var CustomImportScript = (() => {
       }];
     }
   };
-  return __toCommonJS(import_listing_page_exports);
+  return __toCommonJS(import_content_detail_exports);
 })();

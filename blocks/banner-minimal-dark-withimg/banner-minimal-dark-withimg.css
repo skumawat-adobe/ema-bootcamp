@@ -1,59 +1,127 @@
+/*
+ * Block: banner-minimal-dark-withimg
+ * Overlay CTA banner: full-width card with a background image, a bottom-up
+ * dark gradient overlay, and white heading/subheading/CTA anchored to the
+ * bottom-left. Values extracted from source computed styles.
+ */
+
+/* Full-bleed inside the section (remove the 1200px content max-width) */
 .banner-minimal-dark-withimg-container .banner-minimal-dark-withimg-wrapper {
   max-width: unset;
-  padding: 0;
 }
 
-.banner-minimal-dark-withimg {
+/* The block wraps a single row (its only child div). Make that row the card. */
+.banner-minimal-dark-withimg > div {
   position: relative;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-height: 360px;
-  padding: 48px 24px;
-  border-radius: 12px;
-  overflow: clip;
+  align-items: flex-end;
+  min-height: 320px;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
+/* Background image cell — absolutely positioned to fill the card */
 .banner-minimal-dark-withimg .banner-minimal-dark-withimg-image {
   position: absolute;
   inset: 0;
   z-index: 0;
+  margin: 0;
 }
 
 .banner-minimal-dark-withimg .banner-minimal-dark-withimg-image picture,
 .banner-minimal-dark-withimg .banner-minimal-dark-withimg-image img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
+/* Bottom-up dark gradient overlay for text legibility */
 .banner-minimal-dark-withimg .banner-minimal-dark-withimg-image::after {
   content: '';
   position: absolute;
   inset: 0;
-  background-color: rgb(0 0 0 / 45%);
+  z-index: 1;
+  background-image: linear-gradient(to top, rgb(0 0 0 / 70%) 0%, rgb(0 0 0 / 0%) 60%);
 }
 
+/* Content sits above overlay, anchored bottom-left */
 .banner-minimal-dark-withimg .banner-minimal-dark-withimg-content {
   position: relative;
-  z-index: 1;
-  max-width: 640px;
+  z-index: 2;
+  max-width: 672px;
+  padding: 32px 24px;
+  color: #fff;
 }
 
 .banner-minimal-dark-withimg .banner-minimal-dark-withimg-content h1,
 .banner-minimal-dark-withimg .banner-minimal-dark-withimg-content h2,
-.banner-minimal-dark-withimg .banner-minimal-dark-withimg-content h3,
-.banner-minimal-dark-withimg .banner-minimal-dark-withimg-content p {
-  color: var(--background-color);
+.banner-minimal-dark-withimg .banner-minimal-dark-withimg-content h3 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #fff;
 }
 
-.banner-minimal-dark-withimg.no-image {
+.banner-minimal-dark-withimg .banner-minimal-dark-withimg-content p {
+  margin: 16px 0 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  line-height: 1.6;
+  color: #fff;
+}
+
+/* CTA link — EDS did not decorate it as .button, so style the raw anchor */
+.banner-minimal-dark-withimg .banner-minimal-dark-withimg-content p:last-child {
+  margin-top: 24px;
+}
+
+/* `main .section.inverse a:any-link` sets link color white with high
+   specificity — match it (add `main`) so the CTA text stays readable. */
+main .banner-minimal-dark-withimg .banner-minimal-dark-withimg-content a:any-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #fff;
+  border-radius: 9999px;
+  padding: 12px 24px;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-xs);
+  font-weight: 600;
+  line-height: 1.25;
+  text-decoration: none;
+  background-color: #fff;
+  color: #000;
+  cursor: pointer;
+}
+
+main .banner-minimal-dark-withimg .banner-minimal-dark-withimg-content a:any-link:hover {
+  background-color: transparent;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Fallback when no image is authored */
+.banner-minimal-dark-withimg.no-image > div {
   background-color: var(--text-color);
 }
 
 @media (width >= 900px) {
-  .banner-minimal-dark-withimg {
-    padding: 64px 48px;
-    min-height: 420px;
+  .banner-minimal-dark-withimg > div {
+    min-height: 448px;
+  }
+
+  .banner-minimal-dark-withimg .banner-minimal-dark-withimg-content {
+    padding: 64px;
+  }
+
+  .banner-minimal-dark-withimg .banner-minimal-dark-withimg-content h1,
+  .banner-minimal-dark-withimg .banner-minimal-dark-withimg-content h2,
+  .banner-minimal-dark-withimg .banner-minimal-dark-withimg-content h3 {
+    font-size: 56px;
   }
 }

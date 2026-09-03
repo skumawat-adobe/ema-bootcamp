@@ -1,27 +1,101 @@
+/* Block: cards-minimal-light-withimg-1
+ * Article/trend cards — CSS derived from source computed styles.
+ * Source: 4-col grid, gap 16px; card = bordered rounded clickable link,
+ * image 16/10 cover, body padding 24px, lime category pill + grey date,
+ * Syncopate uppercase h3.
+ */
+
 .cards-minimal-light-withimg-1 > ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (width >= 600px) {
+  .cards-minimal-light-withimg-1 > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  .cards-minimal-light-withimg-1 > ul {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .cards-minimal-light-withimg-1 > ul > li {
-  border: 1px solid #dadada;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(232 232 232);
+  border-radius: 20px;
+  overflow: hidden;
   background-color: var(--background-color);
 }
 
-.cards-minimal-light-withimg-1 .cards-minimal-light-withimg-1-card-body {
-  margin: 16px;
+.cards-minimal-light-withimg-1-card-clickable {
+  cursor: pointer;
 }
 
 .cards-minimal-light-withimg-1 .cards-minimal-light-withimg-1-card-image {
   line-height: 0;
 }
 
-.cards-minimal-light-withimg-1 > ul > li img {
+.cards-minimal-light-withimg-1 .cards-minimal-light-withimg-1-card-image img {
+  display: block;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 10;
   object-fit: cover;
+}
+
+.cards-minimal-light-withimg-1 .cards-minimal-light-withimg-1-card-body {
+  padding: 24px;
+}
+
+/* meta row: lime category pill + grey date */
+.cards-minimal-light-withimg-1 .cards-minimal-light-withimg-1-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 12px;
+}
+
+.cards-minimal-light-withimg-1 .cards-minimal-light-withimg-1-card-tag {
+  background-color: var(--accent-color);
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  padding: 4px 12px;
+  border-radius: 9999px;
+}
+
+.cards-minimal-light-withimg-1 .cards-minimal-light-withimg-1-card-date {
+  color: var(--link-color);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.cards-minimal-light-withimg-1 .cards-minimal-light-withimg-1-card-body h3 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
+.cards-minimal-light-withimg-1 .cards-minimal-light-withimg-1-card-body h3 a:any-link {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.cards-minimal-light-withimg-1-card-clickable:hover .cards-minimal-light-withimg-1-card-body h3 a {
+  text-decoration: underline;
 }

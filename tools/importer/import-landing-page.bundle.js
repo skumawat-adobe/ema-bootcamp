@@ -144,27 +144,67 @@ var CustomImportScript = (() => {
 
   // tools/importer/parsers/cards-minimal-light-withimg-1.js
   function parse5(element, { document: document2 }) {
-    const cards = Array.from(element.querySelectorAll(":scope > a.article-card, :scope > a.card-link, :scope > a"));
+    const IMAGE_SEL = '.article-card-image, .trend-card-image, [class*="card-image"]';
+    const BODY_SEL = '.article-card-body, .trend-card-body, [class*="card-body"]';
+    const firstAnchor = element.querySelector("a[href]");
+    const fallbackHref = firstAnchor ? firstAnchor.getAttribute("href") : null;
+    const isImageWrapper = (node) => node && node.nodeType === 1 && typeof node.className === "string" && /card-image/.test(node.className);
     const cells = [];
-    cards.forEach((card) => {
-      const href = card.getAttribute("href");
-      const img = card.querySelector('.article-card-image img, img.cover-image, img[class*="cover"], img');
+    let bodyWrappers = Array.from(element.querySelectorAll(BODY_SEL));
+    const buildRow = (imgWrapper, bodyContainer, href) => {
+      const img = imgWrapper ? imgWrapper.querySelector("img") : bodyContainer ? null : null;
       const bodyCell = [];
-      const meta = card.querySelector(".article-card-meta");
-      if (meta) bodyCell.push(meta);
-      const heading = card.querySelector('h1, h2, h3, h4, [class*="heading"]');
-      if (heading) {
-        if (href) {
-          const link = document2.createElement("a");
-          link.setAttribute("href", href);
-          link.append(...heading.childNodes);
-          heading.append(link);
-        }
-        bodyCell.push(heading);
+      if (bodyContainer) {
+        Array.from(bodyContainer.children).forEach((node) => {
+          if (node.nodeType !== 1) return;
+          const isHeading = /^H[1-6]$/.test(node.tagName) || typeof node.className === "string" && /heading/.test(node.className);
+          if (isHeading && href) {
+            const link = document2.createElement("a");
+            link.setAttribute("href", href);
+            link.append(...node.childNodes);
+            node.append(link);
+          }
+          bodyCell.push(node);
+        });
       }
       if (!img && bodyCell.length === 0) return;
       cells.push([img || "", bodyCell.length ? bodyCell : ""]);
-    });
+    };
+    if (bodyWrappers.length) {
+      bodyWrappers.forEach((body) => {
+        let imgWrapper = body.previousElementSibling;
+        if (!isImageWrapper(imgWrapper)) {
+          const anchor = body.closest("a");
+          imgWrapper = anchor ? anchor.querySelector(IMAGE_SEL) : null;
+        }
+        const ownAnchor = body.closest("a");
+        const href = ownAnchor && ownAnchor.getAttribute("href") || fallbackHref;
+        buildRow(imgWrapper, body, href);
+      });
+    } else {
+      const anchors = Array.from(element.querySelectorAll(":scope > a"));
+      anchors.forEach((card) => {
+        const href = card.getAttribute("href") || fallbackHref;
+        const imgWrapper = card.querySelector(IMAGE_SEL);
+        const img = card.querySelector('img.cover-image, img[class*="cover"], img');
+        const bodyCell = [];
+        Array.from(card.children).forEach((node) => {
+          if (node.nodeType !== 1) return;
+          if (imgWrapper && (node === imgWrapper || node.contains(imgWrapper))) return;
+          if (!imgWrapper && img && (node === img || node.contains(img))) return;
+          const isHeading = /^H[1-6]$/.test(node.tagName) || typeof node.className === "string" && /heading/.test(node.className);
+          if (isHeading && href) {
+            const link = document2.createElement("a");
+            link.setAttribute("href", href);
+            link.append(...node.childNodes);
+            node.append(link);
+          }
+          bodyCell.push(node);
+        });
+        if (!img && bodyCell.length === 0) return;
+        cells.push([img || "", bodyCell.length ? bodyCell : ""]);
+      });
+    }
     if (cells.length === 0) {
       element.replaceWith(...element.childNodes);
       return;

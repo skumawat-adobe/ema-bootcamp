@@ -1,0 +1,89 @@
+/* columns-minimal-light-withimg — image + text, two equal columns
+   Values extracted from source computed styles (wknd-trendsetters.site). */
+
+/* row: mobile-first single column */
+.columns-minimal-light-withimg > div {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* cells */
+.columns-minimal-light-withimg > div > div {
+  order: 1;
+}
+
+.columns-minimal-light-withimg > div > .columns-minimal-light-withimg-img-col {
+  order: 0;
+}
+
+/* image: rounded, 3:2 aspect, cover */
+.columns-minimal-light-withimg img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* text column */
+.columns-minimal-light-withimg h2 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xxl);
+  font-weight: 700;
+  line-height: 1.1;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
+.columns-minimal-light-withimg p {
+  margin: 16px 0 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  line-height: 1.6;
+  color: rgb(64 64 64);
+}
+
+/* CTA: styled as a black pill button (link is not auto-decorated by EDS) */
+.columns-minimal-light-withimg > div > div > p:has(> a:only-child) {
+  margin-top: 24px;
+}
+
+.columns-minimal-light-withimg > div > div > p > a:any-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin: 0;
+  border: 2px solid var(--text-color);
+  border-radius: 9999px;
+  padding: 12px 24px;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-xs);
+  font-weight: 600;
+  line-height: 1.25;
+  text-decoration: none;
+  background-color: var(--text-color);
+  color: var(--background-color);
+}
+
+.columns-minimal-light-withimg > div > div > p > a:any-link:hover {
+  background-color: #333;
+  border-color: #333;
+  color: var(--background-color);
+  text-decoration: none;
+}
+
+@media (width >= 900px) {
+  .columns-minimal-light-withimg > div {
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .columns-minimal-light-withimg > div > div {
+    flex: 1;
+    order: unset;
+  }
+}

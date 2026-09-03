@@ -1,47 +1,86 @@
-.hero-minimal-light-withimg-1-container .hero-minimal-light-withimg-1-wrapper {
-  max-width: unset;
-  padding: 0;
-}
+/* hero-minimal-light-withimg-1 — two-column light hero (text + stacked image group) */
 
 .hero-minimal-light-withimg-1 {
-  position: relative;
-  padding: 40px 24px;
-  min-height: 300px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: center;
 }
 
-.hero-minimal-light-withimg-1 h1,
-.hero-minimal-light-withimg-1 h2,
-.hero-minimal-light-withimg-1 h3,
-.hero-minimal-light-withimg-1 h4,
-.hero-minimal-light-withimg-1 h5,
-.hero-minimal-light-withimg-1 h6,
-.hero-minimal-light-withimg-1 p {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  color: var(--background-color);
+/* image column — grid of 3 rounded images */
+.hero-minimal-light-withimg-1 .hero-images {
+  order: 2;
 }
 
-.hero-minimal-light-withimg-1.no-image * {
+.hero-minimal-light-withimg-1 .hero-images p {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+  margin: 0;
+}
+
+.hero-minimal-light-withimg-1 .hero-images picture {
+  display: block;
+  line-height: 0;
+}
+
+.hero-minimal-light-withimg-1 .hero-images img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+/* content column (heading + subheading + CTAs) */
+.hero-minimal-light-withimg-1 .hero-content {
+  order: 1;
+}
+
+.hero-minimal-light-withimg-1 .hero-content h1 {
+  margin: 0;
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 44px;
+  letter-spacing: -0.8px;
+  text-transform: uppercase;
   color: var(--text-color);
 }
 
-.hero-minimal-light-withimg-1 picture {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  object-fit: cover;
-  box-sizing: border-box;
+.hero-minimal-light-withimg-1 .hero-content p {
+  margin: 24px 0 0;
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  line-height: 1.6;
+  color: var(--text-color);
 }
 
-.hero-minimal-light-withimg-1 img {
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
+.hero-minimal-light-withimg-1 .hero-content .button-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.hero-minimal-light-withimg-1 .hero-content .button-group p {
+  margin: 0;
 }
 
 @media (width >= 900px) {
   .hero-minimal-light-withimg-1 {
-    padding: 40px 32px;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 64px;
+  }
+
+  .hero-minimal-light-withimg-1 .hero-images p {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-minimal-light-withimg-1 .hero-content h1 {
+    font-size: 56px;
+    line-height: 61.6px;
+    letter-spacing: -1.12px;
   }
 }

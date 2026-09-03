@@ -1,27 +1,41 @@
+/* Block: cards-minimal-light-withimg
+ * Image gallery — grid of image-only cards. Values from source computed styles.
+ * Source: 4-col grid, 12px gap, square (1/1) cards, 20px radius, overflow hidden.
+ */
+
 .cards-minimal-light-withimg > ul {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(257px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
 }
 
 .cards-minimal-light-withimg > ul > li {
-  border: 1px solid #dadada;
-  background-color: var(--background-color);
-}
-
-.cards-minimal-light-withimg .cards-minimal-light-withimg-card-body {
-  margin: 16px;
+  margin: 0;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 .cards-minimal-light-withimg .cards-minimal-light-withimg-card-image {
   line-height: 0;
 }
 
-.cards-minimal-light-withimg > ul > li img {
+.cards-minimal-light-withimg .cards-minimal-light-withimg-card-image img {
+  display: block;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1 / 1;
   object-fit: cover;
+}
+
+/* Image-only variant: text body cells are empty */
+.cards-minimal-light-withimg .cards-minimal-light-withimg-card-body:empty {
+  display: none;
+}
+
+@media (width >= 900px) {
+  .cards-minimal-light-withimg > ul {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

@@ -1,33 +1,72 @@
+/* columns-minimal-light — "Let's connect" contact columns
+   Values extracted from https://wknd-trendsetters.site/faq computed styles. */
+
+/* Row: mobile-first single column, stacks intro above contacts */
 .columns-minimal-light > div {
   display: flex;
   flex-direction: column;
-}
-
-.columns-minimal-light img {
-  width: 100%;
+  gap: 40px;
 }
 
 .columns-minimal-light > div > div {
-  order: 1;
+  margin: 0;
 }
 
-.columns-minimal-light > div > .columns-minimal-light-img-col {
-  order: 0;
+/* Intro column: heading + paragraph */
+.columns-minimal-light > div > div:first-child h2 {
+  margin: 0;
+  font-size: var(--heading-font-size-xxl);
+  line-height: 1.1;
 }
 
-.columns-minimal-light > div > .columns-minimal-light-img-col img {
-  display: block;
+.columns-minimal-light > div > div:first-child p {
+  margin: 16px 0 0;
+  font-size: var(--body-font-size-m);
+  line-height: 1.6;
+  color: #404040;
 }
 
+/* Contact column: labeled groups (Email / Phone / Address) */
+.columns-minimal-light > div > div:last-child h3 {
+  margin: 32px 0 0;
+  font-size: var(--heading-font-size-xs);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  color: var(--link-color);
+}
+
+.columns-minimal-light > div > div:last-child > :first-child {
+  margin-top: 0;
+}
+
+.columns-minimal-light > div > div:last-child p {
+  margin: 8px 0 0;
+  font-size: var(--body-font-size-m);
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+/* Contact links: plain, dark, no underline until hover */
+.columns-minimal-light > div > div:last-child a:any-link {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.columns-minimal-light > div > div:last-child a:hover {
+  text-decoration: underline;
+}
+
+/* Desktop: two equal columns, wide gap, top-aligned */
 @media (width >= 900px) {
   .columns-minimal-light > div {
-    align-items: center;
-    flex-direction: unset;
-    gap: 24px;
+    flex-direction: row;
+    align-items: start;
+    gap: 64px;
   }
 
   .columns-minimal-light > div > div {
     flex: 1;
-    order: unset;
   }
 }

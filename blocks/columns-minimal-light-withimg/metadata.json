@@ -1,0 +1,40 @@
+{
+  "variantName": "columns-minimal-light-withimg",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-09-03T10:26:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://wknd-trendsetters.site/fashion-trends-young-adults-casual-sport",
+    "originPage": "content-detail page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "minimal",
+    "purpose": "feature",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "two columns: one image column beside a text column (heading + paragraph + 1 CTA)",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "image-beside-text feature sections on light backgrounds",
+      "two-column layouts pairing a single cover image with a heading, paragraph and CTA",
+      "promotional split content with one image and one text/CTA column"
+    ],
+    "notSuitableFor": [
+      "text-only two-column layouts (use columns-minimal-light)",
+      "dark-themed columns",
+      "repeating card-style item grids (use a cards variant)"
+    ],
+    "notes": "Created because the existing columns-minimal-light variant is text-only (noimg, contact purpose) and explicitly not suitable for image-heavy side-by-side layouts. This variant preserves the base columns image-column detection (columns-minimal-light-withimg-img-col)."
+  },
+  "usage": {
+    "pagesUsing": ["/fashion-trends-young-adults-casual-sport"],
+    "reuseCount": 1,
+    "lastUsed": "2026-09-03T10:26:00.000Z"
+  }
+}

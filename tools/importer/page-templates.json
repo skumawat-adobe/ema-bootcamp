@@ -398,8 +398,71 @@
         "https://wknd-trendsetters.site/fashion-trends-young-adults-casual-sport"
       ],
       "coverageGaps": [],
-      "description": "Single-topic content page with hero header, a card grid section, a secondary two-column block, and an accent call-to-action",
-      "blocks": []
+      "description": "Single-topic content page with hero header, a trend card grid, a two-column image+text block, and an accent call-to-action",
+      "blocks": [
+        {
+          "name": "hero-minimal-light-withimg-1",
+          "instances": [
+            "#main-content > header.section.secondary-section div.grid-layout.tablet-1-column.grid-gap-xxl"
+          ]
+        },
+        {
+          "name": "cards-minimal-light-withimg-1",
+          "instances": [
+            "#trends div.grid-layout.desktop-4-column.grid-gap-md"
+          ]
+        },
+        {
+          "name": "columns-minimal-light-withimg",
+          "instances": [
+            "#main-content > section.section.secondary-section div.grid-layout.tablet-1-column.grid-gap-lg"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "rc1",
+          "name": "hero-header",
+          "selector": "#main-content > header.section.secondary-section",
+          "style": "secondary",
+          "blocks": [
+            "hero-minimal-light-withimg-1"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "rc2",
+          "name": "trend-card-grid",
+          "selector": "#trends",
+          "style": null,
+          "blocks": [
+            "cards-minimal-light-withimg-1"
+          ],
+          "defaultContent": [
+            "#trends > div.container > div.utility-text-align-center"
+          ]
+        },
+        {
+          "id": "rc3",
+          "name": "secondary-two-column",
+          "selector": "#main-content > section.section.secondary-section:has(div.grid-layout.tablet-1-column.grid-gap-lg)",
+          "style": "secondary",
+          "blocks": [
+            "columns-minimal-light-withimg"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "rc4",
+          "name": "accent-cta",
+          "selector": "#main-content > section.section.accent-section",
+          "style": "accent",
+          "blocks": [],
+          "defaultContent": [
+            "#main-content > section.section.accent-section > div.container"
+          ]
+        }
+      ]
     }
   ],
   "metadata": {
