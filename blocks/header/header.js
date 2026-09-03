@@ -114,9 +114,13 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
  */
 export default async function decorate(block) {
   // load nav as fragment
+  // Metadata-independent dual-path: try the local content path first (aem up
+  // serves the working-copy fragment under /content), then fall back to the
+  // site root where DA/EDS publishes the fragment in production.
   const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
-  const fragment = await loadFragment(navPath);
+  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/content/nav';
+  let fragment = await loadFragment(navPath);
+  if (!fragment) fragment = await loadFragment('/nav');
 
   // decorate nav DOM
   block.textContent = '';
